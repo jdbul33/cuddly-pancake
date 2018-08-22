@@ -82,6 +82,18 @@ Much of this data is available on South Bend's open data portal at \href{https:/
 
 	\subsection{Final Dashboard}
 
+After completion of the above analysis, the final dashboard was constructed.  Each chart in this dashboard stems from a question or interest identified by the city analysts.  The Bokeh package was used to create interactive visualizations, and allowed the final product to be conveniently packaged into a HTML file and sent to the call center management.  In all, the dashboard includes visualizations of:
+
+\begin{itemize}
+  \item{Pie chart of total call time by department}
+  \item{Histogram of call volume by day of week, overlaid, with legend providing hide/show capabilities}
+  \item{Bar chart of topics with longest average call duration}
+  \item{Bar chart of topics with shortest average call duration}
+  \item{Jitterplot of call volume by topic within top departments}
+  \item{Bar chart of call volume by month}
+\end{itemize}
+
+These charts all utilize various implementation of Bokeh tools, such as HoverTool, BoxZoom, Pan, and checkbox interactivity.  By incorporating these interactions into the dashboard, the result is a more dynamic, engaging product that is simple to interact with for employees outside of the technical fields.  An image of the final dashboard can be found at the end of this paper, while a live link can be followed \href{https://jdbul33.github.io/311_Call_Dashboard.html}{here}.
 
 
 \section{Discussion}
