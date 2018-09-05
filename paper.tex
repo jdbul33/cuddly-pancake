@@ -1,4 +1,4 @@
-\documentclass[11pt,twocolumn]{article}
+\documentclass{article}
 \usepackage{graphicx}
 \usepackage{pdfpages}
 \usepackage{hyperref}
@@ -27,13 +27,13 @@ Valparaiso University\\
 \textit{The city of South Bend, Indiana operates a call center that serves as a primary point of contact for citizens.  The call center handles topics for nearly all of the city's departments.  An open data portal, maintained by the city, contains several years worth of information.  An analysis of this data was conducted using Python 3.6.  The data was 
 analyzed for patterns by time of year, department, and topics with varying methods.  The cleaned, manipulated, and explored data was then developed into an 
 interactive dashboard using the Bokeh library.  In doing so, an interactive HTML file will be distributed to the city, which can then be utilized, modified, and possibly connected 
-directly to the data source}.
+directly to the data source.  Upon completetion, this analysis yielded} %results stuff here
 \end{abstract}
 
 \section{Introduction}
-The city of South Bend, located in northern Indiana, established a citizen-accessible call center in February 2013.  The call center handles calls from citizens regarding almost every aspect of city interaction, including waste pick-up and removal, water billing and disconnections, 
-and code enforcement.  By serving as a central hub for communication, the call center is able to consolidate much of the data regarding citizen/consumer issues.  
-Much of this data is available on South Bend's open data portal at \href{https://data-southbend.opendata.arcgis.com}{https://data-southbend.opendata.arcgis.com}.  The guiding questions for this analysis included seeking patterns and statistics on call volume and duration by timeframe, department, and topics.  The city has used several services/formats for data collection, resulting in data sets from differing time periods having different attributes and formats.  For most of the in-depth topic analysis, the most current format was used.
+The city of South Bend, located in northern Indiana, established a citizen-accessible call center in February 2013.  The call center handles isues from citizens regarding almost every aspect of city interaction, including waste pick-up and removal, water billing and disconnections, 
+and code enforcement.  By serving as a central hub for communication, the call center is able to consolidate a substantial amount of data regarding citizens as consumers.  
+This data is available on South Bend's open data portal at \href{https://data-southbend.opendata.arcgis.com}{https://data-southbend.opendata.arcgis.com}.
 
 	\subsection{Prior Work}
 
@@ -42,18 +42,10 @@ Much of this data is available on South Bend's open data portal at \href{https:/
 
 	\subsection{Goals \& Desired Results}
 
-The goal of this analysis and visualization task is to, at its core, provide the city of South Bend useful and actionable knowledge about its call center.  The city was most curious about trends based on time, 
-%I dont like that word
-departments, and topics.  Therefore, this analysis has four major analytical focuses:  month of year, day of the week, department, and topic.  
-%I hate everything here
-In order to illustrate the finding in the most information-rich way possible, an interactive graphical dashboard was chosen as the primary means of communication.  This dashboard is able to be sent throughout the city management conveniently, as it is simply a self-contained HTML file.  Neither Python nor the data sources are necessary to view and interact with this visualization.
+The goal of this analysis and visualization task is to, at its core, provide the city of South Bend useful and actionable knowledge about its call center.  Given the information-rich nature of this project, an interactive graphical dashboard was chosen as the primary means to communicate results.  The city was most curious about trends based on time, departments, and topics.  Therefore, this analysis has four major analytical foci:  month of year, day of the week, department, and topic.  
 
 
 \section{Methods}
-
-	\subsection{Programming \& Packages}
-
-This entire analysis was conducted in Anaconda 5.2 running Python 3.6.4.  The Python packages used throughout this analysis are all contained within the Anaconda distribution.  These include Numpy, Pandas, Matplotlib, Scipy, Seaborn, and Bokeh.\cite{python}\cite{anaconda}  The programming and analysis was all conducted using Windows 10 OS.  The methods and output, however, should be able to work on Python 3.6 (with the required packages) on any OS.  The code, however, is not backwards-compatible to Python 2.x. 
 
 	\subsection{Data}
 
@@ -67,11 +59,11 @@ The third file, referred to as the topic data, is the storage method of the curr
 
 	\subsection{Loading, Cleaning, \& Preprocessing the Data}
 
-This entire analysis was completed using the Anaconda 5.2 distribution of Python 3.6 (Windows 64-bit).  The data was loaded into 3 separate dataframes through the use of Pandas.  The data was then inspected for missing data and reasonableness.  Very little data was missing, with the exception of a small percentage of observations in the case data (the older data).  Less than 4\% of the 488,601 observations contained missing data.  These rows were missing a significant proportion of their respective attributes, and thus were dropped completely from the data.  The daily data was missing no data points.  The topic data, however, was missing almost 90\% of entries into an attribute titled ``Regarding".  Since this attribute was of type ``string", a substantial amount was missing, and it was irrelevant to the analysis, it was dropped completely.  This dataset was missing no other data.
+This entire analysis was completed using the Anaconda 5.2 distribution of Python 3.6.  The data was loaded into 3 separate dataframes through the use of Pandas.  The data was then inspected for missing data and reasonableness.  Very little data was missing, with the exception of a small percentage of observations in the case data (the older data).  Less than 4\% of the 488,601 observations contained missing data.  These rows were missing a significant proportion of their respective attributes, and thus were dropped completely from the data.  The daily data was missing no data points.  The topic data, however, was missing almost 90\% of entries into an attribute titled ``Regarding".  Since this attribute was of type ``string", a substantial amount was missing, and it was irrelevant to the analysis, it was dropped completely.  This dataset was missing no other data.
 \par
 Upon reading the CSV files using the Pandas, Python initialized most of the attributes as objects.  Preprocessing and transforming was conducted immediately to transform the attributes into more useful types, such as date-time and numeric objects.  Further processing was done throughout the project as necessary in order to provide a useful format.
 
-	\subsection{Calls by Month}
+	\subsection{Methods of Analysis}
 
 An analysis of call volume by month was conducted using the daily data, which provides aggregate totals by day for a 2-year period. The relevant data was manipulated by taking the mean of the daily call volume for every record in each month.  As an exercise in thoroughness, these findings were subjected to a two-sided t-test for statistical significance.  The daily call volumes for each month were isolated and stored as lists within a Python dictionary.  The scipy.stats package was used to conduct the test.  For the purposes of this test, the null hypothesis stated that ``the two months have identical expected values."  For the null hypothesis to be disproved, a standard threshold p-value of 0.05 was used.
 
@@ -81,66 +73,13 @@ Calls by day of week were able to be obtained from two data files:  daily data a
 
 	\subsection{Calls by Department}
 
-One of the primary tasks posed by the city was to explore call trends on a departmental level.  This was conducted primarily using the topic data, as the data contained accurate and complete information regarding departments.  In addition to being the most recent, this data also utilizes the new department/topic layout that the city has transitioned to.  This format includes the knowledge base articles described earlier.  In this native data format, the department titles were often followed by the characters ``- KB Team".  Since leaving this suffix appended to each title would only visually detract from the dashboard, the string was removed.  This process can be seen below:\\
-
-  \begin{Verbatim}[fontsize=\small]
-  for i in range(len(dept)):
-    n = dept[i]
-    dept[i] = n.replace(" - KB Team", "")
-  \end{Verbatim}
-
-
-Additionally, the time format in the data file was read in as a string.  Upon investigating, the data was found to have an inconsistent format.  For example, duration for one record was in the form ``2:34" for two minutes, thirty-four seconds.  However, for longer calls it could be in the form ``1:15:56" for one hour, fifteen minutes, and fifty-six seconds.  While beneficial visually, this would not function for any analysis.  This data was converted into seconds, stored as a numeric data type, using the following function:
-
-  \begin{Verbatim}[fontsize=\small]
- def string_to_sec(df, col_name):
-     ''' 
-     This function accepts a dataframe and 
-     column name (in quotes)
-     It converts the column from XX:XX:XX to
-     seconds and returns a list.
-     Pandas must be imported and 
-     aliased as pd
-     '''
-     new = []
-     for i in range(len(df[col_name])):
-         x = df.loc[i][col_name]
-         if x.count(":") == 1:
-            ''' For Min:sec '''
-             y, z = x.split(":")
-             y = pd.to_numeric(y)
-             z = pd.to_numeric(z)
-             q = (y * 60) + z
-         elif x.count(":") == 2:
-          '''For H/Min:Min/sec:Sec/Nothing '''
-             h, y, z = x.split(":")
-            if len(h) == 2:
-             ''' This assumes if the
-               first number is 2 digits,
-               it is minutes'''
-                h = pd.to_numeric(h)
-                y = pd.to_numeric(y)
-                q = (h * 60) + y
-             elif len(h) == 1:
-              '''Assuming first digit is 
-                single, means hours'''
-                h = pd.to_numeric(h)
-                y = pd.to_numeric(y)
-                z = pd.to_numeric(z)
-                q = (h*3600) + (y*60) + z
-             else:
-                q = np.NaN
-         else:
-              q = np.NaN
-         new.append(q)
-  return new
-  \end{Verbatim}
-
-This function returns a list, which is then evaluated for reasonableness and appended to the dataframe.  By doing this, every call record now had a new attribute for duration in seconds.
+One of the primary tasks posed by the city was to explore call trends on a departmental level.  This was conducted primarily using the topic data, as the data contained accurate and complete information regarding departments.  In addition to being the most recent, this data also utilizes the new department/topic layout that the city has transitioned to.  This format includes the knowledge base articles described earlier.  In this native data format, the department titles were often followed by the characters ``- KB Team".  Since leaving this suffix appended to each title would only visually detract from the dashboard, the string was removed.  
+\par
+Additionally, the time format in the data file was read in as a string.  Upon investigating, the data was found to have an inconsistent format.  For example, duration for one record was in the form ``2:34" for two minutes, thirty-four seconds.  However, for longer calls it could be in the form ``1:15:56" for one hour, fifteen minutes, and fifty-six seconds.  While beneficial visually, this would not function for any analysis.  This data was converted into seconds, and stored as a numeric data type.
 
 	\subsection{Calls by Topic}
 
-Analyzing calls by topic proved to be one of the most challenging aspects of this analysis.  The topic data was used again here due to its recentness and the homogeneity of topic format.  Among this dataset, 426 unique call topics existed.  The data was then processed to show total call count and average call duration by topics.  This data was then merged with a separate dataframe, indexed by topic with department as the only attribute.  Once completed, the resulting dataframe contained topic, count, average call duration, and corresponding department.  At this point, the data was prepared for analysis.
+The topic data was used again here due to its recentness and the homogeneity of topic format.  Among this dataset, 426 unique call topics existed.  The data was then processed to show total call count and average call duration by topics.  This data was then merged with a separate dataframe, indexed by topic with department as the only attribute.  Once completed, the resulting dataframe contained topic, count, average call duration, and corresponding department.  At this point, the data was prepared for analysis.
 \par
 Call duration by topics was calculated in the dataframe creation above, using the ``.groupby()'' method in Pandas.  However, when the dataframe was sorted to see the quickest and longest average duration, several topics with a low volume rose to the top, some with only one total call.  In a sense, such records can be viewed as outliers, and were thus removed from reporting in the final dashboard.  In the end, only topics with a total volume above the first quartile (of total calls) were included in this analysis.  By reducing the topics analyzed, the call center will be able to focus on topics that take a notable duration to resolve, but that also occur frequently enough to warrant attention.  This code, however, can be easily adjusted to a different threshold, if management so desires.
 \par
@@ -154,53 +93,28 @@ The total number of calls by topic was then analyzed.  The dataframe that was us
 
 Upon analysis, the months with the highest average daily call volumes were July, April, Jun, and May (in that order).  The results can be viewed in Figure 1.  The standard errors for each month (also plotted in Figure 1) do not appear to be so large as to discredit the significance of these differences.  March, interestingly, has the lowest average volume by a large margin.  This is especially intriguing since it is immediately prior to what can be seen as the ``busy season".
 
-\begin{figure}[h]
-  \includegraphics[scale=.27]{month_bar.png}
-  \caption{Plot of average daily call volume by month}
-\end{figure}
-
 The heatmap in Figure 2 shows the resulting p-value between each pairing of months.  From this information, the city can see which months are significantly busier/quieter than others.  By subjecting the data to such a test, important points can be quickly identified that may or may not be obvious in Figure 1.  For example, June's call volumes are not statistically different from those in April.  March, however, has a statistically lower daily average than every other month.
-
-\begin{figure}[h]
-	\includegraphics[scale=.5]{Heatmap.png}
-	\caption{P-values resulting from t-test on daily call volume by month}
-\end{figure}
 
 
 	\subsection{Calls by Day}
 
-The analysis of calls by day of week incorporated over 588,000 calls into the results.  The output, therefore, can be viewed as information-rich and an excellent measure of call center activity, since the combined data sources span from 2013 into 2018.  Given the variablity of the vast amount of data, an interactive historgram was chosen as the best method for communication of results.  The user can click to show/hide days of the week, and the chart will layer the call distributions over each other for comparison.  Figure 3 shows this graph, with Monday and Thursday visible.  The general distribution of each day is similar and appears to follow a 
+The analysis of calls by day of week incorporated over 588,000 calls into the results.  The output, therefore, can be viewed as information-rich and an excellent measure of call center activity, since the combined data sources span from 2013 into 2018.  Given the variablity of the vast amount of data, an interactive historgram was chosen as the best method for communication of results.  The user can click to show/hide days of the week, and the chart will layer the call distributions over each other for comparison.  Figure 3 shows this graph, with Monday and Thursday visible.  The general call distribution of each day is similar and appears to follow a 
 %what the hell kind
 distribution.  Monday has the highest volume distribution, while Friday has the lowest.  This is also evidenced in a swarm plot of only the daily data in Figure 4.
 
-\begin{figure}[h]
-	\includegraphics[scale=.2]{daily_calls.png}
-	\caption{Histogram of total daily calls by day of week, 2013-2018}
-\end{figure}
-
-\begin{figure}[h]
-	\includegraphics[scale=.6]{swarm.png}
-	\caption{Swarmplot of total daily calls by day of week, 2013-2015}
-\end{figure}
 
 	\subsection{Calls by Department}
 
-%analysis here
 Calls by department were analyzed by two measures:  average duration and total volume.  As expected, the results of each analysis differed.  Departments such as Solid Waste and Water Works had the highest call volumes, while Code Enforcement and the Mayor's Office has the longest average durations.  Given this incongruency, it is not immediately clear where the call center's resources are being focused.  As a more direct approach to the measure of total call volume, the total departmental call times were calculated.  Of all the approaches, this calculation of total call time may be the most helpful to the city, as this can directly show where time and budget is being spent.
 
 
 	\subsection{Calls by Topic}
 
-\subsection{Duration}
+Exploration of calls by topic was a priority for the city.  Within each department, numerous topics exist.  Given the recent implementation of knowledge base articles (which can be seen in the most recent data), the attachment of topics to each call has been standardized.  This allows for a simplified, more accurate analysis.  Calls by topic were specifically analyzed by average duration and total call volume.
+\par
+The %left off here
 
-\subsection{Volume}
-
-In order to visualize this data in the most effective manner, a jitterplot was incorporated into the final dashboard.  This plot can be seen in Figure 6.
-
-\begin{figure}[h]
-  \includegraphics[scale=0.25]{jitterplot.png}
-  \caption{Jitterplot of call volume by topic for the busiest departments.  Hovertool is utilized to show topic.  The topic in diamond is not plotted to scale}
-\end{figure}
+\section{Discussion}
 
 	\subsection{Final Dashboard}
 
@@ -216,9 +130,6 @@ After completion of the above analysis, the final dashboard was constructed.  Ea
 \end{itemize}
 
 These charts all utilize various implementation of Bokeh tools, such as HoverTool, BoxZoom, Pan, and checkbox interactivity.  By incorporating these interactions into the dashboard, the result is a more dynamic, engaging product that is simple to interact with for employees outside of the technical fields.  An image of the final dashboard can be found at the end of this paper, while a live link can be followed \href{https://jdbul33.github.io/311_Call_Dashboard.html}{here}.
-
-
-\section{Discussion}
 
 
 \section{Conclusions}
@@ -241,9 +152,33 @@ Anaconda. (2018). Anaconda Distribution 5.2. https://docs.anaconda.com/anaconda/
 
 
 \end{thebibliography}
-%\includepdf{311CallCenterDashboard}
+\newpage
+
+\begin{figure}[p]
+  \includegraphics[scale=.27]{month_bar.png}
+  \caption{Plot of average daily call volume by month}
+\end{figure}
+
+\begin{figure}[p]
+	\includegraphics[scale=.5]{Heatmap.png}
+	\caption{P-values resulting from t-test on daily call volume by month}
+\end{figure}
 
 
+\begin{figure}[p]
+	\includegraphics[scale=.35]{daily_calls.png}
+	\caption{Histogram of total daily calls by day of week, 2013-2018}
+\end{figure}
+
+\begin{figure}[p]
+	\includegraphics[scale=.6]{swarm.png}
+	\caption{Swarmplot of total daily calls by day of week, 2013-2015}
+\end{figure}
+
+\begin{figure}[p]
+  \includegraphics[scale=0.25]{jitterplot.png}
+  \caption{Jitterplot of call volume by topic for the busiest departments.  Hovertool is utilized to show topic.  The topic in diamond is not plotted to scale}
+\end{figure}
 
 \end{document}
 
