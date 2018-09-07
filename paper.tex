@@ -32,8 +32,7 @@ directly to the data source.  Upon completetion, this analysis yielded} %results
 
 \section{Introduction}
 The city of South Bend, located in northern Indiana, established a citizen-accessible call center in February 2013.  The call center handles isues from citizens regarding almost every aspect of city interaction, including waste pick-up and removal, water billing and disconnections, 
-and code enforcement.  By serving as a central hub for communication, the call center is able to consolidate a substantial amount of data regarding citizens as consumers.  
-This data is available on South Bend's open data portal at \href{https://data-southbend.opendata.arcgis.com}{https://data-southbend.opendata.arcgis.com}.
+and code enforcement.  By serving as a central hub for communication, the call center is able to consolidate a substantial amount of data regarding citizens as consumers.  This data is available on South Bend's open data portal at \href{https://data-southbend.opendata.arcgis.com}{https://data-southbend.opendata.arcgis.com}.
 
 	\subsection{Prior Work}
 
@@ -49,9 +48,7 @@ The goal of this analysis and visualization task is to, at its core, provide the
 
 	\subsection{Data}
 
-The data to be analyzed was acquired in three distinct comma-separated value files.  Two of the files are publicly available, and are also posted on the \href{https://github.com/jdbul33/verbose-chainsaw}{Github repository} for this project.  The third file was received directly from the city of South Bend, and as a result is not posted publicly at this time.
-\par
-The first file, referred to as the daily data, contains a daily summary of the call center data from the years 2013-2015.  It is organized with 637 records indexed by date, with each record containing information such as the number of calls presented, average wait time, average number of calls in queue, and number of abandoned calls for that day.
+The data to be analyzed was acquired in three distinct comma-separated value files.  The first file, referred to as the daily data, contains a daily summary of the call center data from the years 2013-2015.  It is organized with 637 records indexed by date, with each record containing information such as the number of calls presented, average wait time, average number of calls in queue, and number of abandoned calls for that day.
 \par
 The second file, referred to as the case data, contains 488,601 rows of individual call data from 2013 through 2015.  Calls were logged anonymously with data such as date, duration, topic, and department.  This data format went obsolete when the current call system was implemented.
 \par
@@ -112,9 +109,11 @@ Calls by department were analyzed by two measures:  average duration and total v
 
 Exploration of calls by topic was a priority for the city.  Within each department, numerous topics exist.  Given the recent implementation of knowledge base articles (which can be seen in the most recent data), the attachment of topics to each call has been standardized.  This allows for a simplified, more accurate analysis.  Calls by topic were specifically analyzed by average duration and total call volume.
 \par
-The %left off here
-
-\section{Discussion}
+When ranked by average duration, many obscure topics rose to the extremes.  Of the top 20 topics with the shortest duration, 19 had a total number of calls of less than three.  When viewed as a percentage of the total 202,500 call dataset, these calls are such a small proportion that it would give little actionable insight to the city.  A similar, though less extreme, situation occurred when viewing topics with longest duration.
+\par
+In light of this exploration, it was determined that the most important results for the city to see would include only topics that composed a significant proportion of total calls.  When ranking by duration, only topics with total volume above the first quartile of total call volume were included.  This yielded results that could be viewed as more relevant to management.  Topics with long durations seemed to be centralized around complaints and billing issues, and quick topics were mostly comprised of general information inquiries.  When analyzed in this manner, there is a 195 second difference between the longest and shortest topics.
+\par
+When topics were ranked in order of total call volume, the top results mostly represented the busiest departments identified earlier, such as Water Works and Solid Waste. The top topics included scheduling an extra trash pickup and water line shut-off deadlines.  Additionally, two of the most voluminous topics were ``Miscellaneous Trash Information" and ``Water Miscellaneous".  It could be inferred that these two topics serve as a catch-all for the call center.  By showing management these results, they may be able to discover the true nature of many of these calls, as well as impress the importance of accurate recording by call center operators.
 
 	\subsection{Final Dashboard}
 
@@ -129,7 +128,7 @@ After completion of the above analysis, the final dashboard was constructed.  Ea
   \item{Bar chart of call volume by month}
 \end{itemize}
 
-These charts all utilize various implementation of Bokeh tools, such as HoverTool, BoxZoom, Pan, and checkbox interactivity.  By incorporating these interactions into the dashboard, the result is a more dynamic, engaging product that is simple to interact with for employees outside of the technical fields.  An image of the final dashboard can be found at the end of this paper, while a live link can be followed \href{https://jdbul33.github.io/311_Call_Dashboard.html}{here}.
+These charts all utilize various implementation of Bokeh tools, such as HoverTool, BoxZoom, Pan, and checkbox interactivity.  By incorporating these interactions into the dashboard, the result is a more dynamic, engaging product that is simple to interact with for employees outside of the technical fields.  An image of the final dashboard can be found at the end of this paper, while a live link can be accessed at \href{http://jdbul33.github.io/CallCenterDashboard.html}{http://jdbul33.github.io/CallCenterDashboard.html}.
 
 
 \section{Conclusions}
@@ -143,12 +142,6 @@ Several paths for further work on this topic exist; however, the exact approach 
 
 
 \begin{thebibliography}{9}
-	
-\bibitem{python}
-Python Software Foundation. (2016). Python 3.6. https://docs.python.org/3.6/.
-
-\bibitem{anaconda}
-Anaconda. (2018). Anaconda Distribution 5.2. https://docs.anaconda.com/anaconda/.
 
 
 \end{thebibliography}
