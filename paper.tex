@@ -2,6 +2,7 @@
 \usepackage{graphicx}
 \usepackage{pdfpages}
 \usepackage{hyperref}
+\usepackage[margin=1.25in]{geometry}
 
 \hypersetup{
     colorlinks=true,
@@ -15,7 +16,7 @@
 \title{Analysis \& Visualization of Call Center Data using Python}
 \author{John D. Bulger
 \\
-Karl Schmitt, PhD. (Advisor)
+Karl Schmitt, Ph.D. (Advisor)
 \\
 Valparaiso University\\
 }
@@ -27,7 +28,7 @@ Valparaiso University\\
 \textit{The city of South Bend, Indiana operates a call center that serves as a primary point of contact for citizens.  The call center handles topics for nearly all of the city's departments.  An open data portal, maintained by the city, contains several years worth of information.  An analysis of this data was conducted using Python 3.6.  The data was 
 analyzed for patterns by time of year, department, and topics with varying methods.  The cleaned, manipulated, and explored data was then developed into an 
 interactive dashboard using the Bokeh library.  In doing so, an interactive HTML file will be distributed to the city, which can then be utilized, modified, and possibly connected 
-directly to the data source.  Upon completetion, this analysis yielded} %results stuff here
+directly to the data source.  Upon completetion, this analysis identified insights that could be actionable by the city.  July was found to be the most voluminous month, which was shown to be statistically signficant through the use of a two-sided t-test.  Additionally, the departments of Solid Waste and Water Works, along with many of their sub-topics, had some of the highest call volumes.  When calls were analyzed by duration, however, many lower volume topics were shown to take longer to resolve.}
 \end{abstract}
 
 \section{Introduction}
@@ -36,12 +37,15 @@ and code enforcement.  By serving as a central hub for communication, the call c
 
 	\subsection{Prior Work}
 
+The purpose of this research is to uncover trends and insights that may be of use to call center management.  Within the scope of this analysis, call duration can be seen as the ``efficiency" measure within this call center, particularly on a topical basis.  This metric is identified by Baraka et al. as one of the primary measures to assess call center success.\cite{baraka}  The authors identify other parameters, but analyzing this operation's success level was not within the scope of this paper.
+\par
+Call center and queueing analysis has been the focus of academic research for years.  Brown et al. provide an excellent overview of the Poisson distribution modeling customer arrivals, as well as the accompanying assumptions.  While arrival distribution is not analyzed in this paper, the authors' assumptions are, for the most part, assumed to be true in this analysis.  These center around the general assumption that the customers and operators are statistically identical and that they all act independently.\cite{brown}  As a result, differences in time-dependent parameters, customer attitudes and preferences, and operator skill levels are treated as neglegible.
 
 
 
 	\subsection{Goals \& Desired Results}
 
-The goal of this analysis and visualization task is to, at its core, provide the city of South Bend useful and actionable knowledge about its call center.  Given the information-rich nature of this project, an interactive graphical dashboard was chosen as the primary means to communicate results.  The city was most curious about trends based on time, departments, and topics.  Therefore, this analysis has four major analytical foci:  month of year, day of the week, department, and topic.  
+The goal of this analysis and visualization task is to, at its core, provide the city of South Bend useful and actionable knowledge about its call center.  Given the information-rich nature of this project, an interactive graphical dashboard was chosen as the primary means to communicate results.  The city was most curious about trends based on time, departments, and topics.  Therefore, this analysis has four major analytical foci:  month of year, day of the week, department, and topic.
 
 
 \section{Methods}
@@ -60,7 +64,7 @@ This entire analysis was completed using the Anaconda 5.2 distribution of Python
 \par
 Upon reading the CSV files using the Pandas, Python initialized most of the attributes as objects.  Preprocessing and transforming was conducted immediately to transform the attributes into more useful types, such as date-time and numeric objects.  Further processing was done throughout the project as necessary in order to provide a useful format.
 
-	\subsection{Methods of Analysis}
+	\subsection{Calls by Month}
 
 An analysis of call volume by month was conducted using the daily data, which provides aggregate totals by day for a 2-year period. The relevant data was manipulated by taking the mean of the daily call volume for every record in each month.  As an exercise in thoroughness, these findings were subjected to a two-sided t-test for statistical significance.  The daily call volumes for each month were isolated and stored as lists within a Python dictionary.  The scipy.stats package was used to conduct the test.  For the purposes of this test, the null hypothesis stated that ``the two months have identical expected values."  For the null hypothesis to be disproved, a standard threshold p-value of 0.05 was used.
 
@@ -141,8 +145,13 @@ Several paths for further work on this topic exist; however, the exact approach 
 
 
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{2}
 
+\bibitem{baraka}
+Baraka, H., Baraka H. \& El-Gamily, I. (2013). Assessing call centers' success: A validation of the DeLone and Mclean model for information system. \textit{Egyptian Informatics Journal, 14}, 99-108.
+
+\bibitem{brown}
+Brown, L., Gans, N., Mandelbaum, A., Sakov, A., Shen, H., Zeltyn, S., \& Zhao, L. (2005). Statistical analysis of a telephone call center: a queueing-science perspective. \textit{Journal of the American Statistical Association, 100(469)}, 36-50.
 
 \end{thebibliography}
 \newpage
