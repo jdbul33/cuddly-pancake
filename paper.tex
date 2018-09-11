@@ -32,7 +32,7 @@ directly to the data source.  Upon completetion, this analysis identified insigh
 \end{abstract}
 
 \section{Introduction}
-The city of South Bend, located in northern Indiana, established a citizen-accessible call center in February 2013.  The call center handles isues from citizens regarding almost every aspect of city interaction, including waste pick-up and removal, water billing and disconnections, 
+The city of South Bend, located in northern Indiana, established a citizen-accessible call center in February 2013.  They address almost every aspect of city-citizen interaction, including waste pick-up and removal, water billing and disconnections, 
 and code enforcement.  By serving as a central hub for communication, the call center is able to consolidate a substantial amount of data regarding citizens as consumers.  This data is available on South Bend's open data portal at \href{https://data-southbend.opendata.arcgis.com}{https://data-southbend.opendata.arcgis.com}.
 
 	\subsection{Prior Work}
@@ -45,47 +45,30 @@ Call center and queueing analysis has been the focus of academic research for ye
 
 	\subsection{Goals \& Desired Results}
 
-The goal of this analysis and visualization task is to, at its core, provide the city of South Bend useful and actionable knowledge about its call center.  Given the information-rich nature of this project, an interactive graphical dashboard was chosen as the primary means to communicate results.  The city was most curious about trends based on time, departments, and topics.  Therefore, this analysis has four major analytical foci:  month of year, day of the week, department, and topic.
+The goal of this analysis and visualization task is to, at its core, provide the city of South Bend useful and actionable knowledge about its call center.  Given the information-rich nature of this project, an interactive graphical dashboard was chosen as the primary means to communicate results.  The city was most curious about trends based on time, departments, and topics.  Therefore, this project had four major analytical foci:  month of year, day of the week, department, and topic.
 
 
-\section{Methods}
+\section{Data}
 
-	\subsection{Data}
-
-The data to be analyzed was acquired in three distinct comma-separated value files.  The first file, referred to as the daily data, contains a daily summary of the call center data from the years 2013-2015.  It is organized with 637 records indexed by date, with each record containing information such as the number of calls presented, average wait time, average number of calls in queue, and number of abandoned calls for that day.
+The data to be analyzed was acquired in three distinct files.
 \par
-The second file, referred to as the case data, contains 488,601 rows of individual call data from 2013 through 2015.  Calls were logged anonymously with data such as date, duration, topic, and department.  This data format went obsolete when the current call system was implemented.
+\textbf{Daily Data --} contains a daily summary of the call center data from the years 2013-2015.  It is organized with 637 records indexed by date, with each record containing information such as the number of calls presented, average wait time, average number of calls in queue, and number of abandoned calls for that day.
 \par
-The third file, referred to as the topic data, is the storage method of the current phone system in use by the city.  This file contains 202,500 call records from 2016-2018.  It contains much of the same attributes as the case data, but it is standardized to reflect the city's use of knowledge base articles.  These articles correspond to possible questions or issues raised by callers; as a result, the call center employees have a reference to answer questions.  Additionally, this systemizes the format for recording issues for each call, since each topic has a standardized name.  This ensures topics and departments match across the list, allowing for efficient and accurate analysis.  Since this is the most recent data and is reflective of the city's current systems, this file was heavily relied upon for analysis on a departmental and topical basis.
-
-	\subsection{Loading, Cleaning, \& Preprocessing the Data}
-
-This entire analysis was completed using the Anaconda 5.2 distribution of Python 3.6.  The data was loaded into 3 separate dataframes through the use of Pandas.  The data was then inspected for missing data and reasonableness.  Very little data was missing, with the exception of a small percentage of observations in the case data (the older data).  Less than 4\% of the 488,601 observations contained missing data.  These rows were missing a significant proportion of their respective attributes, and thus were dropped completely from the data.  The daily data was missing no data points.  The topic data, however, was missing almost 90\% of entries into an attribute titled ``Regarding".  Since this attribute was of type ``string", a substantial amount was missing, and it was irrelevant to the analysis, it was dropped completely.  This dataset was missing no other data.
+\textbf{Case Data --} contains 488,601 rows of individual call data from 2013 through 2015.  Calls were logged anonymously with data such as date, duration, topic, and department.  This data format went obsolete when the current call system was implemented.
 \par
-Upon reading the CSV files using the Pandas, Python initialized most of the attributes as objects.  Preprocessing and transforming was conducted immediately to transform the attributes into more useful types, such as date-time and numeric objects.  Further processing was done throughout the project as necessary in order to provide a useful format.
-
-	\subsection{Calls by Month}
-
-An analysis of call volume by month was conducted using the daily data, which provides aggregate totals by day for a 2-year period. The relevant data was manipulated by taking the mean of the daily call volume for every record in each month.  As an exercise in thoroughness, these findings were subjected to a two-sided t-test for statistical significance.  The daily call volumes for each month were isolated and stored as lists within a Python dictionary.  The scipy.stats package was used to conduct the test.  For the purposes of this test, the null hypothesis stated that ``the two months have identical expected values."  For the null hypothesis to be disproved, a standard threshold p-value of 0.05 was used.
-
-	\subsection{Calls by Day of Week}
-
-Calls by day of week were able to be obtained from two data files:  daily data and topic data.  The first conveniently had an attribute consisting of an integer corresponding to a weekday.  The topic data included a date of call, but it did not have a direct day attribute.  Such an attribute was able to be created through the use of the ``to\_datetime()" and ``weekday()" functions in Pandas.  Once this attribute was created in the same format as the daily data, the dataframes were concatonated using ``concat()".  Aggregate call totals by day were then simply calculated using the ``.count()" method in Pandas.
-
-	\subsection{Calls by Department}
-
-One of the primary tasks posed by the city was to explore call trends on a departmental level.  This was conducted primarily using the topic data, as the data contained accurate and complete information regarding departments.  In addition to being the most recent, this data also utilizes the new department/topic layout that the city has transitioned to.  This format includes the knowledge base articles described earlier.  In this native data format, the department titles were often followed by the characters ``- KB Team".  Since leaving this suffix appended to each title would only visually detract from the dashboard, the string was removed.  
+\textbf{Topic Data --} contains many of the same attributes as the case data, but it reflects the city's current use of knowledge base articles.  This systemizes the format for recording issues for each call, since each topic has a standardized name.  This ensures topics and departments match across the list, allowing for efficient and accurate analysis.
 \par
-Additionally, the time format in the data file was read in as a string.  Upon investigating, the data was found to have an inconsistent format.  For example, duration for one record was in the form ``2:34" for two minutes, thirty-four seconds.  However, for longer calls it could be in the form ``1:15:56" for one hour, fifteen minutes, and fifty-six seconds.  While beneficial visually, this would not function for any analysis.  This data was converted into seconds, and stored as a numeric data type.
+The data was then inspected for missing data and reasonableness.  The daily data was missing no data points.  In the case data, less than 4\% of the 488,601 observations contained missing data.  These rows were missing a significant proportion of their respective attributes, and thus were dropped completely from the data.  The topic data, however, was missing almost 90\% of entries into an attribute used for open-format comments.  Since a substantial amount was missing and it was irrelevant to the analysis, this attribute was dropped completely.  This dataset was missing no other data.  Preprocessing and transformation was conducted immediately to transform the attributes into more useful types, such as date-time and numeric objects.
 
-	\subsection{Calls by Topic}
+\section{Analytical Methods}
 
-The topic data was used again here due to its recentness and the homogeneity of topic format.  Among this dataset, 426 unique call topics existed.  The data was then processed to show total call count and average call duration by topics.  This data was then merged with a separate dataframe, indexed by topic with department as the only attribute.  Once completed, the resulting dataframe contained topic, count, average call duration, and corresponding department.  At this point, the data was prepared for analysis.
+\textbf{Call volume by month --} was conducted using the daily data, which provides aggregate totals by day for a 2-year period. The relevant data was manipulated by taking the mean of the daily call volume for every record in each month.  As an exercise in thoroughness, these findings were subjected to a two-sided t-test for statistical significance.  For the purposes of this test, the null hypothesis stated that ``the two months have identical expected values."  For the null hypothesis to be disproved, a standard threshold p-value of 0.05 was used.
 \par
-Call duration by topics was calculated in the dataframe creation above, using the ``.groupby()'' method in Pandas.  However, when the dataframe was sorted to see the quickest and longest average duration, several topics with a low volume rose to the top, some with only one total call.  In a sense, such records can be viewed as outliers, and were thus removed from reporting in the final dashboard.  In the end, only topics with a total volume above the first quartile (of total calls) were included in this analysis.  By reducing the topics analyzed, the call center will be able to focus on topics that take a notable duration to resolve, but that also occur frequently enough to warrant attention.  This code, however, can be easily adjusted to a different threshold, if management so desires.
+\textbf{Call volume by day of the week --} was conducted from data contained in two files: daily data and topic data.  The first conveniently had an attribute consisting of an integer corresponding to a weekday.  The topic data included a date of call, but it did not have a direct day attribute.  This attributed was created with the same format as the daily data, and the calls corresponding to each date were counted.  The two dataframes were then concantenated, providing the total number of calls for each date.  Once grouped by weekday, this yielded a distribution of total calls for each day of the week over a five year period.
 \par
-The total number of calls by topic was then analyzed.  The dataframe that was used in the previous analysis was again used for this.  Using the ``.groupby()" method in Pandas in conjunction with ``.count()", the total number of calls for each topic was appended to the dataframe.  The most frequent call topics were quickly identified, and many showed a significant overlap with the highest volume departments.  As a result, the volume by topic in and of itself would not serve much use to the city.  Therefore, the top 7 highest volume departments (identified in Figure 2) were isolated from the rest of the data.  The individual topics within these departments were then identified.  By approaching the analysis in this manner, the city can easily see the most popular topics in the busiest departments.
-
+\textbf{Calls volume and duration by department --} were analyzed using the topic data, as the data contained recent and complete information regarding departments.  One major impediment in this data was the format of call duration, which did not utilize a fixed-length field.  For example, duration for one record was in the form ``2:34" for two minutes, thirty-four seconds.  However, for longer calls it could be in the form ``1:15:56" for one hour, fifteen minutes, and fifty-six seconds.  While beneficial visually, this would not function for any analysis.  The duration was converted into seconds, and stored as a numeric data type.
+\par
+\textbf{Call volume and duration by topic --} were analyzed from the topic data as well.  Among this dataset, 426 unique call topics existed.  The data was then processed to show total call count and average call duration by topics.  Once completed, the data was able to be sorted by volume and duration, allowing for one dataset to serve the purposes of analysis of both duration and volume.
 
 
 \section{Analysis}
