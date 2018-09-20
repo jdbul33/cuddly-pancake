@@ -75,21 +75,22 @@ The data was then inspected for missing data and reasonableness.  The daily data
 
 	\subsection{Calls by Month}
 
-Upon analysis, the months with the highest average daily call volumes were July, April, Jun, and May (in that order).  The results can be viewed in Figure 1.  The standard errors for each month (also plotted in Figure 1) do not appear to be so large as to discredit the significance of these differences.  March, interestingly, has the lowest average volume by a large margin.  This is especially intriguing since it is immediately prior to what can be seen as the ``busy season".
+Upon analysis, the months with the highest average daily call volumes were July, April, June, and May (in that order).  The results can be viewed in Figure 1.  The standard errors for each month (also plotted in Figure 1) appear to be small enough the significance of these differences.  March, interestingly, has the lowest average volume by a large margin.  This is especially intriguing since it is immediately prior to what can be seen as the ``busy season".
 
-The heatmap in Figure 2 shows the resulting p-value between each pairing of months.  From this information, the city can see which months are significantly busier/quieter than others.  By subjecting the data to such a test, important points can be quickly identified that may or may not be obvious in Figure 1.  For example, June's call volumes are not statistically different from those in April.  March, however, has a statistically lower daily average than every other month.
+The heatmap in Figure 2 shows the resulting p-value between each pairing of months.  An interesting point that appears is that June's call volumes are not statistically different from those in April.  March, however, has a statistically lower daily average than every other month.
 
 
 	\subsection{Calls by Day}
 
-The analysis of calls by day of week incorporated over 588,000 calls into the results.  The output, therefore, can be viewed as information-rich and an excellent measure of call center activity, since the combined data sources span from 2013 into 2018.  Given the variablity of the vast amount of data, an interactive historgram was chosen as the best method for communication of results.  The user can click to show/hide days of the week, and the chart will layer the call distributions over each other for comparison.  Figure 3 shows this graph, with Monday and Thursday visible.  The general call distribution of each day is similar and appears to follow a 
+The analysis of calls by day of week incorporated over 588,000 calls into the results.  Figure 3 shows this graph, with Monday and Thursday visible.  The general call distribution of each day is similar and appears to follow a 
 %what the hell kind
 distribution.  Monday has the highest volume distribution, while Friday has the lowest.  This is also evidenced in a swarm plot of only the daily data in Figure 4.
 
 
 	\subsection{Calls by Department}
 
-Calls by department were analyzed by two measures:  average duration and total volume.  As expected, the results of each analysis differed.  Departments such as Solid Waste and Water Works had the highest call volumes, while Code Enforcement and the Mayor's Office has the longest average durations.  Given this incongruency, it is not immediately clear where the call center's resources are being focused.  As a more direct approach to the measure of total call volume, the total departmental call times were calculated.  Of all the approaches, this calculation of total call time may be the most helpful to the city, as this can directly show where time and budget is being spent.
+Calls by department were analyzed by two measures:  average duration and total volume.  Departments such as Solid Waste and Water Works had the highest call volumes, while Code Enforcement and the Mayor's Office had the longest average durations.  Given this incongruency, it is not immediately clear where the call center's resources are being focused.  As a more direct approach to the measure of total call volume, the total departmental call times were calculated.
+%add plot here
 
 
 	\subsection{Calls by Topic}
