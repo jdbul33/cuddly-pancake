@@ -39,7 +39,10 @@ and code enforcement.  By serving as a central hub for communication, the call c
 
 The purpose of this research is to uncover trends and insights that may be of use to call center management.  Within the scope of this analysis, call duration can be seen as the ``efficiency" measure within this call center, particularly on a topical basis.  This metric is identified by Baraka et al. as one of the primary measures to assess call center success.\cite{baraka}  The authors identify other parameters, but analyzing this operation's success level was not within the scope of this paper.
 \par
-Call center and queueing analysis has been the focus of academic research for years.  Brown et al. provide an excellent overview of the Poisson distribution modeling customer arrivals, as well as the accompanying assumptions.  While arrival distribution is not analyzed in this paper, the authors' assumptions are, for the most part, assumed to be true in this analysis.  These center around the general assumption that the customers and operators are statistically identical and that they all act independently.\cite{brown}  As a result, differences in time-dependent parameters, customer attitudes and preferences, and operator skill levels are treated as neglegible.
+Call center and queueing analysis has been the focus of academic research for years.  Brown et al. provide an excellent overview of the Poisson distribution modeling customer arrivals, as well as the accompanying assumptions.  While arrival distribution is not analyzed in this paper, the authors' assumptions are, for the most part, assumed to be true in this analysis.  These center around the general assumption that the customers and operators are statistically identical and that they all act independently.\cite{brown}  Zhang, Hong, and Zhang also descibe the arrival process as a Poisson distribution, but discuss models which may be more accurate alternatives.\cite{zhang}  They maintain some of the main assumptions as Brown.  As a result, differences in time-dependent parameters, customer attitudes and preferences, and operator skill levels are treated as neglegible.
+\par
+Prior work with call centers often centers around simulation.  According to Bapat and Pruitte, simulation is the preferred method to analyze and determine the effectiveness of a call center.\cite{bapat}  It allows for evaluation of metrics beyond what a basic analysis encompasses.  For example, the scheduling of call agents should be optimized against call duration and abandonment, as documented by Saltzman and Mehrota.\cite{saltzman}  This could be viewed as a logical next step for this project, with this work discovering the baseline knowedge necessary to construct such a model.
+
 
 
 
@@ -73,39 +76,26 @@ The data was then inspected for missing data and reasonableness.  The daily data
 
 \section{Analysis}
 
-	\subsection{Calls by Month}
-
-Upon analysis, the months with the highest average daily call volumes were July, April, June, and May (in that order).  The results can be viewed in Figure 1.  The standard errors for each month (also plotted in Figure 1) appear to be small enough the significance of these differences.  March, interestingly, has the lowest average volume by a large margin.  This is especially intriguing since it is immediately prior to what can be seen as the ``busy season".
+\textbf{Call volume by month --} was analyzed using the daily data.  Months with the highest average daily call volumes were July, April, June, and May (in that order).  The results can be viewed in Figure 1.  The standard errors for each month (also plotted in Figure 1) appear to be small enough the significance of these differences.  March, interestingly, has the lowest average volume by a large margin.  This is especially intriguing since it is immediately prior to what can be seen as the ``busy season".
 
 The heatmap in Figure 2 shows the resulting p-value between each pairing of months.  An interesting point that appears is that June's call volumes are not statistically different from those in April.  March, however, has a statistically lower daily average than every other month.
-
-
-	\subsection{Calls by Day}
-
-The analysis of calls by day of week incorporated over 588,000 calls into the results.  Figure 3 shows this graph, with Monday and Thursday visible.  The general call distribution of each day is similar and appears to follow a 
-%what the hell kind
-distribution.  Monday has the highest volume distribution, while Friday has the lowest.  This is also evidenced in a swarm plot of only the daily data in Figure 4.
-
-
-	\subsection{Calls by Department}
-
-Calls by department were analyzed by two measures:  average duration and total volume.  Departments such as Solid Waste and Water Works had the highest call volumes, while Code Enforcement and the Mayor's Office had the longest average durations.  Given this incongruency, it is not immediately clear where the call center's resources are being focused.  As a more direct approach to the measure of total call volume, the total departmental call times were calculated.
-%add plot here
-
-
-	\subsection{Calls by Topic}
-
-Exploration of calls by topic was a priority for the city.  Within each department, numerous topics exist.  Given the recent implementation of knowledge base articles (which can be seen in the most recent data), the attachment of topics to each call has been standardized.  This allows for a simplified, more accurate analysis.  Calls by topic were specifically analyzed by average duration and total call volume.
 \par
-When ranked by average duration, many obscure topics rose to the extremes.  Of the top 20 topics with the shortest duration, 19 had a total number of calls of less than three.  When viewed as a percentage of the total 202,500 call dataset, these calls are such a small proportion that it would give little actionable insight to the city.  A similar, though less extreme, situation occurred when viewing topics with longest duration.
-\par
-In light of this exploration, it was determined that the most important results for the city to see would include only topics that composed a significant proportion of total calls.  When ranking by duration, only topics with total volume above the first quartile of total call volume were included.  This yielded results that could be viewed as more relevant to management.  Topics with long durations seemed to be centralized around complaints and billing issues, and quick topics were mostly comprised of general information inquiries.  When analyzed in this manner, there is a 195 second difference between the longest and shortest topics.
-\par
-When topics were ranked in order of total call volume, the top results mostly represented the busiest departments identified earlier, such as Water Works and Solid Waste. The top topics included scheduling an extra trash pickup and water line shut-off deadlines.  Additionally, two of the most voluminous topics were ``Miscellaneous Trash Information" and ``Water Miscellaneous".  It could be inferred that these two topics serve as a catch-all for the call center.  By showing management these results, they may be able to discover the true nature of many of these calls, as well as impress the importance of accurate recording by call center operators.
 
-	\subsection{Final Dashboard}
+\textbf{Call volume by day of the week --} incorporated over 588,000 calls into the results.  In order to most clearly see the results, a series of boxplots are shown in Figure 2.  Upon evaluation, call volume trends highest on Monday, then steadily decreases as the work week continues on.  The 311 service allows for voicemails to be left after hours, allowing operators to call customers back during business hours.  This could be a reason for the higher number of calls on Monday and Tuesday, since a weekend's worth of calls are presumably being dealt with.
+\par
 
-After completion of the above analysis, the final dashboard was constructed.  Each chart in this dashboard stems from a question or interest identified by the city analysts.  The Bokeh package was used to create interactive visualizations, and allowed the final product to be conveniently packaged into a HTML file and sent to the call center management.  In all, the dashboard includes visualizations of:
+\textbf{Calls by department --} were analyzed by two measures:  average duration and total volume.  Departments such as Solid Waste and Water Works had the highest call volumes, while Code Enforcement and the Mayor's Office had the longest average durations.  Given this incongruency, it is not immediately clear where the call center's resources are being focused.  As a more direct approach to the measure of total call volume, the total departmental call times were calculated.  This can be visualized in Figure 4.
+\par
+
+\textbf{Calls by topic --} were also analyzed by duration and volume.  Within each department, numerous topics exist.  Given the recent implementation of knowledge base articles (which can be seen in the most recent data), the attachment of topics to each call has been standardized.  This allows for a simplified, more accurate analysis.
+\par
+When ranked by average duration, many obscure topics rose to the extremes.  Of the top 20 topics with the shortest duration, 19 had a total number of calls of less than three.  When viewed as a percentage of the total 202,500 call dataset, these calls are such a small proportion that it would give little actionable insight to the city.  A similar, though less extreme, situation occurred when viewing topics with longest duration.  In light of this exploration, it was determined that the most important results for the city to see would include only topics that composed a significant proportion of total calls.  When ranking by duration, only topics with total volume above the first quartile of total call volume were included.  This yielded results that could be viewed as more relevant to management.  Topics with long durations seemed to be centralized around complaints and billing issues, and quick topics were mostly comprised of general information inquiries.  When analyzed in this manner, there is a 195 second difference between the longest and shortest topics. % should this be better?  Graph?
+\par
+When topics were ranked in order of total call volume, the top results mostly represented the busiest departments identified earlier, such as Water Works and Solid Waste. The top topics included scheduling an extra trash pickup and water line shut-off deadlines.  Additionally, two of the most voluminous topics were ``Miscellaneous Trash Information" and ``Water Miscellaneous".  It could be inferred that these two topics serve as a catch-all for the call center.  By showing management these results, they may be able to discover the true nature of many of these calls, as well as impress the importance of accurate recording by call center operators.  Since the most popular topics were representative of the busiest departments, these were visualized in tandem.  The jitterplot in Figure 5 shows the call volume for individual topics within some of the cities busiest departments.
+
+\section{Discussion}
+
+While the above analysis yielded clear results, the call center did not have any specific questions for which it was seeking answers.  Instead, this project was geared towards discovering trends, patterns, and insights; these were then provided to the city so that they could formulate specific questions based on the story that was told by this data.  In order to provide this to city managment, a visualization dashboard was chosn as the most effective medium.  The Bokeh package was used to create interactive visualizations, and allowed the final product to be packaged into a HTML file and sent to the call center management.  In all, the dashboard includes visualizations of:
 
 \begin{itemize}
   \item{Pie chart of total call time by department}
@@ -125,17 +115,28 @@ In summary, this analysis and presentation of data trends can be viewed as a suc
 
 	\subsection{Opportunities for Further Work}
 
-Several paths for further work on this topic exist; however, the exact approach depends on the city's desires.  One approach would be to obtain staffing and scheduling information for the call center and use simulation and optimization techniques to evaluate staffing levels and efficiency.  Another approach would be to develop another dashboard, or perhaps modify the current one, to interact directly with the call center's data source.  This would allow a live, current view of trending topics and departments.  Such a tool could allow call center management to be agile and preemptive regarding emerging trends.
+Several paths for further work on this topic exist; however, the exact approach depends on the city's desires.  Currently, this data is being expanded into a model that will run as a simulation to determine the effectiveness of the call center.  This research provides much insight into distribution of topics and their average by each day of the week.  The data used in this analysis can also be explored from the angle of creating a simulation.  By simply obtaining a weekly operator schedule from the city, an effective simulation can be built to evaluate staffing levels, customer satisfaction, and many other call center metrics.
+\par
+Another possible approach would be to develop another dashboard, or perhaps modify the current one, to interact directly with the call center's data source.  This would allow a live, current view of trending topics and departments.  Such a tool could allow call center management to be agile and preemptive regarding emerging trends.
 
 
 
-\begin{thebibliography}{2}
+\begin{thebibliography}{5}
 
 \bibitem{baraka}
 Baraka, H., Baraka H. \& El-Gamily, I. (2013). Assessing call centers' success: A validation of the DeLone and Mclean model for information system. \textit{Egyptian Informatics Journal, 14}, 99-108.
 
 \bibitem{brown}
 Brown, L., Gans, N., Mandelbaum, A., Sakov, A., Shen, H., Zeltyn, S., \& Zhao, L. (2005). Statistical analysis of a telephone call center: a queueing-science perspective. \textit{Journal of the American Statistical Association, 100(469)}, 36-50.
+
+\bibitem{zhang}
+Xiaowei Zhang, L. Jeff Hong, \& Jiheng Zhang. (2014). Scaling and modeling of call center arrivals. \textit{In Proceedings of the 2014 Winter Simulation Conference (WSC '14)}. IEEE Press, Piscataway, NJ, USA, 476-485.
+
+\bibitem{bapat}
+Vivek Bapat \& Eddie B. Pruitte, Jr.. (1998). Using simulation in call centers. \textit{In Proceedings of the 30th conference on Winter simulation (WSC '98)}, D. J. Medeiros, Edward F. Watson, John S. Carson, and Mani S. Manivannan (Eds.). IEEE Computer Society Press, Los Alamitos, CA, USA, 1395-1400.
+
+\bibitem{saltzman}
+Robert Saltzman \& Vijay Mehrotra. (2007). Managing trade-offs in call center agent scheduling: methodology and case study. \textit{In Proceedings of the 2007 Summer Computer Simulation Conference (SCSC '07)}. Society for Computer Simulation International, San Diego, CA, USA, 643-651.
 
 \end{thebibliography}
 \newpage
@@ -152,13 +153,13 @@ Brown, L., Gans, N., Mandelbaum, A., Sakov, A., Shen, H., Zeltyn, S., \& Zhao, L
 
 
 \begin{figure}[p]
-	\includegraphics[scale=.35]{daily_calls.png}
-	\caption{Histogram of total daily calls by day of week, 2013-2018}
+	\includegraphics[scale=.6]{Daily_Call_Boxplot.png}
+	\caption{Total daily calls by day of week, 2013-2018}
 \end{figure}
 
 \begin{figure}[p]
-	\includegraphics[scale=.6]{swarm.png}
-	\caption{Swarmplot of total daily calls by day of week, 2013-2015}
+	\includegraphics[scale=.6]{Calls_Department.png}
+	\caption{Total Time Spent on Calls by Top Departments, 2016-2018}
 \end{figure}
 
 \begin{figure}[p]
