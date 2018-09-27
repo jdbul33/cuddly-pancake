@@ -32,7 +32,7 @@ directly to the data source.  Upon completetion, this analysis identified insigh
 \end{abstract}
 
 \section{Introduction}
-The city of South Bend, located in northern Indiana, established a citizen-accessible call center in February 2013.  They address almost every aspect of city-citizen interaction, including waste pick-up and removal, water billing and disconnections, 
+The city of South Bend, located in northern Indiana, established a citizen-accessible call center in February 2013.  It addresses almost every aspect of city-citizen interaction, including waste pick-up and removal, water billing and disconnections, 
 and code enforcement.  By serving as a central hub for communication, the call center is able to consolidate a substantial amount of data regarding citizens as consumers.  This data is available on South Bend's open data portal at \href{https://data-southbend.opendata.arcgis.com}{https://data-southbend.opendata.arcgis.com}.
 
 	\subsection{Prior Work}
@@ -41,7 +41,7 @@ The purpose of this research is to uncover trends and insights that may be of us
 \par
 Call center and queueing analysis has been the focus of academic research for years.  Brown et al. provide an excellent overview of the Poisson distribution modeling customer arrivals, as well as the accompanying assumptions.  While arrival distribution is not analyzed in this paper, the authors' assumptions are, for the most part, assumed to be true in this analysis.  These center around the general assumption that the customers and operators are statistically identical and that they all act independently.\cite{brown}  Zhang, Hong, and Zhang also descibe the arrival process as a Poisson distribution, but discuss models which may be more accurate alternatives.\cite{zhang}  They maintain some of the main assumptions as Brown.  As a result, differences in time-dependent parameters, customer attitudes and preferences, and operator skill levels are treated as neglegible.
 \par
-Prior work with call centers often centers around simulation.  According to Bapat and Pruitte, simulation is the preferred method to analyze and determine the effectiveness of a call center.\cite{bapat}  It allows for evaluation of metrics beyond what a basic analysis encompasses.  For example, the scheduling of call agents should be optimized against call duration and abandonment, as documented by Saltzman and Mehrota.\cite{saltzman}  This could be viewed as a logical next step for this project, with this work discovering the baseline knowedge necessary to construct such a model.
+Call centers are a prime opportunity to utilize simulation techniques.  In fact, according to Bapat and Pruitte, simulation is the preferred method to analyze and determine the effectiveness of a call center.\cite{bapat}  It allows for evaluation of metrics beyond what a basic analysis encompasses.  For example, the scheduling of call agents should be optimized against call duration and abandonment, as documented by Saltzman and Mehrota.\cite{saltzman}  This could be viewed as a logical next step for this project, with this work discovering the baseline knowedge necessary to construct such a model.
 
 
 
@@ -76,9 +76,7 @@ The data was then inspected for missing data and reasonableness.  The daily data
 
 \section{Analysis}
 
-\textbf{Call volume by month --} was analyzed using the daily data.  Months with the highest average daily call volumes were July, April, June, and May (in that order).  The results can be viewed in Figure 1.  The standard errors for each month (also plotted in Figure 1) appear to be small enough the significance of these differences.  March, interestingly, has the lowest average volume by a large margin.  This is especially intriguing since it is immediately prior to what can be seen as the ``busy season".
-
-The heatmap in Figure 2 shows the resulting p-value between each pairing of months.  An interesting point that appears is that June's call volumes are not statistically different from those in April.  March, however, has a statistically lower daily average than every other month.
+\textbf{Call volume by month --} was analyzed using the daily data.  Months with the highest average daily call volumes were July, April, June, and May (in that order).  The results can be viewed in Figure 1.  The standard errors for each month (also plotted in Figure 1) appear to be small enough the significance of these differences.  March, interestingly, has the lowest average volume by a large margin.  This is especially intriguing since it is immediately prior to what can be seen as the ``busy season".  The heatmap in Figure 2 shows the resulting p-value from the t-test between each pair of months' distributions.  An interesting point that appears is that June's call volumes are not statistically different from those in April.  March, however, has a statistically lower daily average than every other month.
 \par
 
 \textbf{Call volume by day of the week --} incorporated over 588,000 calls into the results.  In order to most clearly see the results, a series of boxplots are shown in Figure 2.  Upon evaluation, call volume trends highest on Monday, then steadily decreases as the work week continues on.  The 311 service allows for voicemails to be left after hours, allowing operators to call customers back during business hours.  This could be a reason for the higher number of calls on Monday and Tuesday, since a weekend's worth of calls are presumably being dealt with.
