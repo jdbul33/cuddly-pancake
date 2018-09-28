@@ -67,7 +67,7 @@ The data was then inspected for missing data and reasonableness.  The daily data
 
 \textbf{Call volume by month --} was conducted using the daily data, which provides aggregate totals by day for a 2-year period. The relevant data was manipulated by taking the mean of the daily call volume for every record in each month.  As an exercise in thoroughness, these findings were subjected to a two-sided t-test for statistical significance.  For the purposes of this test, the null hypothesis stated that ``the two months have identical expected values."  For the null hypothesis to be disproved, a standard threshold p-value of 0.05 was used.
 \par
-\textbf{Call volume by day of the week --} was conducted from data contained in two files: daily data and topic data.  The first conveniently had an attribute consisting of an integer corresponding to a weekday.  The topic data included a date of call, but it did not have a direct day attribute.  This attributed was created with the same format as the daily data, and the calls corresponding to each date were counted.  The two dataframes were then concantenated, providing the total number of calls for each date.  Once grouped by weekday, this yielded a distribution of total calls for each day of the week over a five year period.
+\textbf{Call volume by day of the week --} was conducted from data contained in two files: daily data and topic data.  The first conveniently had an attribute consisting of an integer corresponding to a weekday.  The topic data included a date of call, but it did not have a direct day attribute.  This attributed was created with the same format as the daily data, and the calls corresponding to each date were counted.  The two dataframes were then concantenated, providing the total number of calls for each date.  Once grouped by weekday, this yielded a distribution of total calls for each day of the week over a five year period.  This data was also subjected to a t-test as monthly call volume was.
 \par
 \textbf{Calls volume and duration by department --} were analyzed using the topic data, as the data contained recent and complete information regarding departments.  One major impediment in this data was the format of call duration, which did not utilize a fixed-length field.  For example, duration for one record was in the form ``2:34" for two minutes, thirty-four seconds.  However, for longer calls it could be in the form ``1:15:56" for one hour, fifteen minutes, and fifty-six seconds.  While beneficial visually, this would not function for any analysis.  The duration was converted into seconds, and stored as a numeric data type.
 \par
@@ -76,20 +76,18 @@ The data was then inspected for missing data and reasonableness.  The daily data
 
 \section{Analysis}
 
-\textbf{Call volume by month --} was analyzed using the daily data.  Months with the highest average daily call volumes were July, April, June, and May (in that order).  The results can be viewed in Figure 1.  The standard errors for each month (also plotted in Figure 1) appear to be small enough the significance of these differences.  March, interestingly, has the lowest average volume by a large margin.  This is especially intriguing since it is immediately prior to what can be seen as the ``busy season".  The heatmap in Figure 2 shows the resulting p-value from the t-test between each pair of months' distributions.  An interesting point that appears is that June's call volumes are not statistically different from those in April.  March, however, has a statistically lower daily average than every other month.
+\textbf{Call volume by month --} was analyzed using the daily data.  Months with the highest average daily call volumes were July, April, June, and May (in that order).  The results can be viewed in Figure 1.  March, interestingly, has the lowest average volume by a large margin.  This is especially intriguing since it is immediately prior to what can be seen as the ``busy season".  The heatmap in Figure 2 shows the resulting p-value from the t-test between each pair of months' distributions.  An interesting point that appears is that June's call volumes are not statistically different from those in April.  March, however, has a statistically lower daily average than every other month.
 \par
 
-\textbf{Call volume by day of the week --} incorporated over 588,000 calls into the results.  In order to most clearly see the results, a series of boxplots are shown in Figure 2.  Upon evaluation, call volume trends highest on Monday, then steadily decreases as the work week continues on.  The 311 service allows for voicemails to be left after hours, allowing operators to call customers back during business hours.  This could be a reason for the higher number of calls on Monday and Tuesday, since a weekend's worth of calls are presumably being dealt with.
+\textbf{Call volume by day of the week --} incorporated over 588,000 calls into the results.  In order to most clearly see the results, a series of boxplots are shown in Figure 3.  Upon evaluation, call volume trends highest on Monday, then steadily decreases as the work week continues on.  The 311 service allows for voicemails to be left after hours, allowing operators to call customers back during business hours.  This could be a reason for the higher number of calls on Monday and Tuesday, since a weekend's worth of calls are presumably being dealt with.  A heatmap is shown in Figure 4, which emphasizes the statistically different mean for each pairing of weekdays (with the exception of Wednesday and Thursday).
 \par
 
 \textbf{Calls by department --} were analyzed by two measures:  average duration and total volume.  Departments such as Solid Waste and Water Works had the highest call volumes, while Code Enforcement and the Mayor's Office had the longest average durations.  Given this incongruency, it is not immediately clear where the call center's resources are being focused.  As a more direct approach to the measure of total call volume, the total departmental call times were calculated.  This can be visualized in Figure 4.
 \par
 
-\textbf{Calls by topic --} were also analyzed by duration and volume.  Within each department, numerous topics exist.  Given the recent implementation of knowledge base articles (which can be seen in the most recent data), the attachment of topics to each call has been standardized.  This allows for a simplified, more accurate analysis.
+\textbf{Calls by topic --} were also analyzed by duration and volume.  When ranked by average duration, many obscure topics rose to the extremes.  Of the top 20 topics with the shortest duration, 19 had a total number of calls of less than three.  When viewed as a percentage of the total 202,500 call dataset, these calls are such a small proportion that it would give little actionable insight to the city.  A similar, though less extreme, situation occurred when viewing topics with longest duration.  In light of this exploration, it was determined that the most important results for the city to see would include only topics that composed a significant proportion of total calls.  When ranking by duration, only topics with total volume above the first quartile of total call volume were included.  This yielded results that could be viewed as more relevant to management.  Topics with long durations seemed to be centralized around complaints and billing issues, and quick topics were mostly comprised of general information inquiries.  When analyzed in this manner, there is a 195 second difference between the longest and shortest topics.
 \par
-When ranked by average duration, many obscure topics rose to the extremes.  Of the top 20 topics with the shortest duration, 19 had a total number of calls of less than three.  When viewed as a percentage of the total 202,500 call dataset, these calls are such a small proportion that it would give little actionable insight to the city.  A similar, though less extreme, situation occurred when viewing topics with longest duration.  In light of this exploration, it was determined that the most important results for the city to see would include only topics that composed a significant proportion of total calls.  When ranking by duration, only topics with total volume above the first quartile of total call volume were included.  This yielded results that could be viewed as more relevant to management.  Topics with long durations seemed to be centralized around complaints and billing issues, and quick topics were mostly comprised of general information inquiries.  When analyzed in this manner, there is a 195 second difference between the longest and shortest topics. % should this be better?  Graph?
-\par
-When topics were ranked in order of total call volume, the top results mostly represented the busiest departments identified earlier, such as Water Works and Solid Waste. The top topics included scheduling an extra trash pickup and water line shut-off deadlines.  Additionally, two of the most voluminous topics were ``Miscellaneous Trash Information" and ``Water Miscellaneous".  It could be inferred that these two topics serve as a catch-all for the call center.  By showing management these results, they may be able to discover the true nature of many of these calls, as well as impress the importance of accurate recording by call center operators.  Since the most popular topics were representative of the busiest departments, these were visualized in tandem.  The jitterplot in Figure 5 shows the call volume for individual topics within some of the cities busiest departments.
+Topic volume was dominated by topics within many of the top departments identified earlier in Figure 1.  The top two highest volume topics, by a large margin, were ``Miscellaneous Trash Information" and ``Water Miscellaneous".  This is reflective of positions of Solid Waste and Water Works in the departmental analysis.  In order to allow the city to effectively visualize this tandem effect, topics within the some of the busiest departments were plotted in an interactive jitterplot, as seen in Figure 4.
 
 \section{Discussion}
 
@@ -140,8 +138,8 @@ Robert Saltzman \& Vijay Mehrotra. (2007). Managing trade-offs in call center ag
 \newpage
 
 \begin{figure}[p]
-  \includegraphics[scale=.27]{month_bar.png}
-  \caption{Plot of average daily call volume by month}
+  \includegraphics[scale=.6]{monthly_boxplot.png}
+  \caption{Distribution of average daily call volume by month}
 \end{figure}
 
 \begin{figure}[p]
@@ -152,7 +150,12 @@ Robert Saltzman \& Vijay Mehrotra. (2007). Managing trade-offs in call center ag
 
 \begin{figure}[p]
 	\includegraphics[scale=.6]{Daily_Call_Boxplot.png}
-	\caption{Total daily calls by day of week, 2013-2018}
+	\caption{Total daily calls by day of week}
+\end{figure}
+
+\begin{figure}[p]
+	\includegraphics[scale=.5]{Daily_Heatmap.png}
+	\caption{P-values resulting from t-test on daily call volume by day of the week}
 \end{figure}
 
 \begin{figure}[p]
