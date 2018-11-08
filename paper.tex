@@ -25,7 +25,7 @@ Valparaiso University\\
 \maketitle
 
 \begin{abstract}
-\textit{The city of South Bend, Indiana operates a call center that serves as a primary point of contact for citizens.  The call center handles topics for nearly all of the city's departments.  An open data portal, maintained by the city, contains several years worth of information.  An analysis of this data was conducted using Python 3.6.  The data was 
+\textit{The city of South Bend, Indiana operates a call center that serves as a primary point of contact for citizens.  The call center handles topics for nearly all of the city's departments.  An open data portal, maintained by the city, contains several years' worth of information.  An analysis of this data was conducted using Python 3.6.  The data was 
 analyzed for patterns by time of year, department, and topics with varying methods.  The cleaned, manipulated, and explored data was then developed into an 
 interactive dashboard using the Bokeh library.  An interactive HTML file was be distributed to the city, which can then be utilized, modified, and possibly connected 
 directly to the data source.  This analysis discovered insights that are of interest to the city.  July was found to be the most voluminous month, which was shown to be statistically significant through the use of a two-sided t-test.  Additionally, the departments of Solid Waste and Water Works, along with many of their sub-topics, had some of the highest call volumes.  When calls were analyzed by duration, however, many lower volume topics were shown to take longer to resolve.}
@@ -58,7 +58,7 @@ The data to be analyzed was acquired in three distinct files.
 \par
 \textbf{Topic Data --} contains many of the same attributes as the case data, but it reflects the city's current use of knowledge base articles.  This systemizes the format for recording issues for each call, since each topic has a standardized name.  This ensures topics and departments match across the list, allowing for efficient and accurate analysis.
 \par
-After loading the data, it was then inspected for missing data and reasonableness.  The daily data was missing no data points.  In the case data, less than 4\% of the 488,601 observations contained missing data.  These rows were missing a significant proportion of their respective attributes, and thus were dropped completely from the data.  The topic data, however, was missing almost 90\% of entries in an attribute used for open-format comments.  Since a substantial amount was missing and it was irrelevant to the analysis, this attribute was dropped completely.  This dataset was missing no other data.  Preprocessing and transformation was conducted immediately to transform the attributes into more useful types, such as date-time and numeric objects.
+After loading the data, it was then inspected for missing data and reasonableness.  The daily data was missing no data points.  In the case data, less than 4\% of the 488,601 observations contained missing data.  These rows were missing a significant proportion of their respective attributes, and thus were dropped completely from the data.  The topic data, however, was missing almost 90\% of entries in an attribute used for open-format comments.  Since a substantial amount was missing and it was irrelevant to the analysis, this attribute was dropped completely.  This dataset was missing no other data.  Preprocessing and transformation were conducted immediately to transform the attributes into more useful types, such as date-time and numeric objects.
 
 \section{Analytical Methods}
 
@@ -88,7 +88,7 @@ Topic volume was dominated by topics within many of the top departments identifi
 
 \section{Project Outcomes}
 
-While the above analysis yielded clear results, the call center did not have any specific questions for which it was seeking answers.  Instead, this project was geared towards discovering trends, patterns, and insights; these were then provided to the city so that they could formulate specific questions based on the story that was told by this data.  In order to provide this to city management, a visualization dashboard was chosen as the most effective medium.  The Bokeh package was used to create interactive visualizations, and allowed the final product to be packaged into a HTML file and sent to the call center management.  In all, the dashboard includes visualizations of:
+While the above analysis yielded clear results, the call center did not have any specific questions for which it was seeking answers.  Instead, this project was geared towards discovering trends, patterns, and insights; these were then provided to the city so that they could formulate specific questions based on the story that was told by this data.  In order to provide this to city management, a visualization dashboard was chosen as the most effective medium.  The Bokeh package was used to create interactive visualizations and allowed the final product to be packaged into a HTML file and sent to the call center management.  In all, the dashboard includes visualizations of:
 
 \begin{itemize}
   \item{Pie chart of total call time by department}
